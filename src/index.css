@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Green-themed color palette inspired by ParkMobile */
+    --background: 0 0% 100%;
+    --foreground: 210 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 15% 15%;
+
+    /* Primary green - main brand color */
+    --primary: 152 60% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 152 60% 85%;
+    --primary-dark: 152 60% 35%;
+
+    /* Secondary green variants */
+    --secondary: 152 25% 95%;
+    --secondary-foreground: 152 60% 25%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 210 15% 45%;
+
+    --accent: 152 30% 90%;
+    --accent-foreground: 152 60% 25%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 31% 91%;
+    --input: 214 31% 91%;
+    --ring: 152 60% 45%;
+
+    /* Design system colors */
+    --success: 152 60% 45%;
+    --success-light: 152 60% 85%;
+    --warning: 45 93% 58%;
+    --info: 210 100% 56%;
+    
+    /* Gradient definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(152 60% 45%), hsl(152 60% 35%));
+    --gradient-light: linear-gradient(135deg, hsl(152 25% 95%), hsl(0 0% 100%));
+    --gradient-hero: linear-gradient(135deg, hsl(152 60% 45%) 0%, hsl(152 60% 35%) 100%);
+    
+    /* Shadow definitions */
+    --shadow-sm: 0 2px 4px hsl(152 60% 45% / 0.1);
+    --shadow-md: 0 4px 12px hsl(152 60% 45% / 0.15);
+    --shadow-lg: 0 8px 24px hsl(152 60% 45% / 0.2);
+    --shadow-glow: 0 0 20px hsl(152 60% 45% / 0.3);
+    
+    /* Animation timings */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 210 15% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 210 15% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 210 15% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 152 60% 55%;
+    --primary-foreground: 210 15% 8%;
+    --primary-light: 152 60% 75%;
+    --primary-dark: 152 60% 45%;
+
+    --secondary: 210 15% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 210 15% 15%;
+    --muted-foreground: 210 15% 65%;
+
+    --accent: 210 15% 15%;
+    --accent-foreground: 152 60% 55%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 210 15% 20%;
+    --input: 210 15% 20%;
+    --ring: 152 60% 55%;
+
+    --success: 152 60% 55%;
+    --success-light: 152 60% 75%;
+    --warning: 45 93% 58%;
+    --info: 210 100% 66%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(152 60% 55%), hsl(152 60% 45%));
+    --gradient-light: linear-gradient(135deg, hsl(210 15% 15%), hsl(210 15% 10%));
+    --gradient-hero: linear-gradient(135deg, hsl(152 60% 55%) 0%, hsl(152 60% 45%) 100%);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out forwards;
+  }
+  
+  /* Gradient utilities */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-light {
+    background: var(--gradient-light);
+  }
+  
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  /* Shadow utilities */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Button hover effects */
+  .btn-hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .btn-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  /* Card hover effects */
+  .card-hover {
+    transition: var(--transition-smooth);
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes pulse-green {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(152 60% 45% / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 10px hsl(152 60% 45% / 0);
+    }
+  }
+  
+  .animate-pulse-green {
+    animation: pulse-green 2s infinite;
+  }
+}

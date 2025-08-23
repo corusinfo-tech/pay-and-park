@@ -107,12 +107,13 @@ export default function CustomMap({
   }
 
   return (
-    <div className="h-[500px] w-full rounded-lg overflow-hidden shadow-md">
+    <div className="h-[500px] w-full rounded-lg overflow-hidden shadow-md z-0" >
       <MapContainer
         center={location}
         zoom={15}
         scrollWheelZoom
-        className="h-full w-full"
+        className="h-full w-full z-0"
+        
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'

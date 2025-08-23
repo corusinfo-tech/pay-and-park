@@ -28,6 +28,8 @@ const ParkNow = () => {
   const [selectedStation, setSelectedStation] = useState<any | null>(null);
 
   const [stations, setStations] = useState<any[]>([]);
+  const [distances, setDistances] = useState<Record<string, any>>({});
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -58,26 +60,30 @@ const ParkNow = () => {
     }
   }, []);
 
-  const quickActions = [
-    {
-      icon: MapPin,
-      title: "Find by Location",
-      description: "Search for parking near your destination",
-      action: "search",
-    },
-    {
-      icon: Timer,
-      title: "Enter Zone Number",
-      description: "Type the zone number from the parking sign",
-      action: "zone",
-    },
-    {
-      icon: Navigation,
-      title: "Use Current Location",
-      description: "Find parking spots near you right now",
-      action: "location",
-    },
-  ];
+  useEffect(() => {
+    const fetchDistances = async () => {
+      if (!userLocation || stations.length === 0) return;
+
+      const updatedDistances: Record<string, any> = {};
+      await Promise.all(
+        stations.map(async (spot) => {
+          const lat = parseFloat(spot.latitude);
+          const lng = parseFloat(spot.longitude);
+
+          if (!isNaN(lat) && !isNaN(lng)) {
+            updatedDistances[spot.ownerID] = await getOSRMDistance(
+              userLocation!,
+              { lat, lng }
+            );
+          }
+        })
+      );
+
+      setDistances(updatedDistances);
+    };
+
+    fetchDistances();
+  }, [userLocation, stations.length]);
 
   const getAverageRating = (reviews: any[]) => {
     if (!reviews || reviews.length === 0) return "—";
@@ -85,13 +91,13 @@ const ParkNow = () => {
     return (total / reviews.length).toFixed(1);
   };
 
-  const getDistanceFromLatLonInKm = (
+  const getHaversineDistance = (
     lat1: number,
     lon1: number,
     lat2: number,
     lon2: number
   ) => {
-    const R = 6371; // Radius of earth in KM
+    const R = 6371; // Radius of earth in km
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
     const dLon = ((lon2 - lon1) * Math.PI) / 180;
     const a =
@@ -101,7 +107,43 @@ const ParkNow = () => {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in KM
+    return R * c; // distance in km
+  };
+
+  const getOSRMDistance = async (
+    origin: { lat: number; lng: number },
+    destination: { lat: number; lng: number }
+  ) => {
+    try {
+      const url = `https://router.project-osrm.org/route/v1/driving/${origin.lng},${origin.lat};${destination.lng},${destination.lat}?overview=false`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (data.routes && data.routes.length > 0) {
+        const distanceMeters = data.routes[0].distance;
+        const durationSeconds = data.routes[0].duration;
+        return {
+          distanceKm: (distanceMeters / 1000).toFixed(2),
+          durationMin: Math.round(durationSeconds / 60),
+          source: "osrm",
+        };
+      }
+    } catch (err) {
+      console.error("OSRM error:", err);
+    }
+
+    // Fallback → Haversine
+    const haversineKm = getHaversineDistance(
+      origin.lat,
+      origin.lng,
+      destination.lat,
+      destination.lng
+    );
+    return {
+      distanceKm: haversineKm.toFixed(2),
+      durationMin: null,
+      source: "haversine",
+    };
   };
 
   const filteredStations = stations.filter((spot) => {
@@ -261,14 +303,13 @@ const ParkNow = () => {
                       <div className="flex items-center space-x-2 text-muted-foreground">
                         <Navigation className="w-4 h-4" />
                         <span>
-                          {userLocation
-                            ? `${getDistanceFromLatLonInKm(
-                                userLocation.lat,
-                                userLocation.lng,
-                                parseFloat(spot.latitude),
-                                parseFloat(spot.longitude)
-                              ).toFixed(2)} km`
-                            : "—"}
+                          {distances[spot.ownerID] ? (
+                            `${distances[spot.ownerID].distanceKm} km`
+                          ) : (
+                            <span className="text-gray-400 animate-pulse">
+                              ...
+                            </span>
+                          )}
                         </span>
                       </div>
 

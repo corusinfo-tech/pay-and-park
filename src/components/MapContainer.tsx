@@ -135,25 +135,23 @@ export default function CustomMap({
             icon={carIcon}
           >
             <Popup>
-  <strong>{spot.owner_name}</strong> <br />
-  {spot.owner_address} <br />
-  🚗 {spot.plots?.length || 0} slots
-  <br />
-
-  {/* Directions Button */}
-  {userLocation && (
-    <button
-      className="mt-2 px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
-      onClick={() => {
-        const gmapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${spot.latitude},${spot.longitude}&travelmode=driving`;
-        window.open(gmapsUrl, "_blank");
-      }}
-    >
-      🧭 Get Directions
-    </button>
-  )}
-</Popup>
-
+              <strong>{spot.owner_name}</strong> <br />
+              {spot.owner_address} <br />
+              🚗 {spot.plots?.length || 0} slots
+              <br />
+              {/* Directions Button */}
+              {userLocation && (
+                <button
+                  className="mt-2 px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
+                  onClick={() => {
+                    const gmapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${spot.latitude},${spot.longitude}&travelmode=driving`;
+                    window.open(gmapsUrl, "_blank");
+                  }}
+                >
+                  🧭 Get Directions
+                </button>
+              )}
+            </Popup>
           </Marker>
         ))}
       </MapContainer>

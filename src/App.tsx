@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import "leaflet/dist/leaflet.css";
 
 
+
 const queryClient = new QueryClient();
 
 const App = () => (

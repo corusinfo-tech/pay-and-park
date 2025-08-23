@@ -25,67 +25,12 @@ const ParkNow = () => {
     lng: number;
   } | null>(null);
 
+  const [selectedStation, setSelectedStation] = useState<any | null>(null);
 
   const [stations, setStations] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const nearbySpots = [
-  //   {
-  //     id: 1,
-  //     name: "Main Street Parking",
-  //     address: "123 Main St, Downtown",
-  //     distance: "0.1 miles",
-  //     rate: "$2.50/hour",
-  //     availability: "High",
-  //     type: "Street Parking",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "City Center Garage",
-  //     address: "456 Center Ave, Downtown",
-  //     distance: "0.3 miles",
-  //     rate: "$3.00/hour",
-  //     availability: "Medium",
-  //     type: "Parking Garage",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Plaza Lot",
-  //     address: "789 Plaza Blvd, Downtown",
-  //     distance: "0.5 miles",
-  //     rate: "$2.00/hour",
-  //     availability: "Low",
-  //     type: "Surface Lot",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Plaza Lot",
-  //     address: "789 Plaza Blvd, Downtown",
-  //     distance: "0.5 miles",
-  //     rate: "$2.00/hour",
-  //     availability: "Low",
-  //     type: "Surface Lot",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Plaza Lot",
-  //     address: "789 Plaza Blvd, Downtown",
-  //     distance: "0.5 miles",
-  //     rate: "$2.00/hour",
-  //     availability: "Low",
-  //     type: "Surface Lot",
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Plaza Lot",
-  //     address: "789 Plaza Blvd, Downtown",
-  //     distance: "0.5 miles",
-  //     rate: "$2.00/hour",
-  //     availability: "Low",
-  //     type: "Surface Lot",
-  //   },
-  // ];
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -164,14 +109,39 @@ const ParkNow = () => {
     if (!searchQuery) return true;
 
     const query = searchQuery.toLowerCase();
-    const nameMatch = spot.owner_name?.toLowerCase().includes(query);
-    const addressMatch = spot.owner_address?.toLowerCase().includes(query);
+    const name = spot.owner_name?.toLowerCase() || "";
+    const address = spot.owner_address?.toLowerCase() || "";
 
-    return nameMatch || addressMatch;
+    return name.includes(query) || address.includes(query);
   });
 
+  // Sort: items starting with query first
+  const sortedStations = [...filteredStations].sort((a, b) => {
+    const query = searchQuery.toLowerCase();
 
-  
+    const aName = a.owner_name?.toLowerCase() || "";
+    const bName = b.owner_name?.toLowerCase() || "";
+    const aAddress = a.owner_address?.toLowerCase() || "";
+    const bAddress = b.owner_address?.toLowerCase() || "";
+
+    const aStarts =
+      aName.startsWith(query) || aAddress.startsWith(query) ? 1 : 0;
+    const bStarts =
+      bName.startsWith(query) || bAddress.startsWith(query) ? 1 : 0;
+
+    // Put "startsWith" matches before others
+    if (aStarts !== bStarts) return bStarts - aStarts;
+
+    return 0; // keep original order otherwise
+  });
+
+  useEffect(() => {
+    if (searchQuery && sortedStations.length > 0) {
+      setSelectedStation(sortedStations[0]); // pick the first match
+    } else {
+      setSelectedStation(null);
+    }
+  }, [searchQuery, sortedStations]);
 
   return (
     <div className="min-h-screen bg-gradient-light">
@@ -214,57 +184,6 @@ const ParkNow = () => {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Quick Actions */}
-        {/* <section className="mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
-            How would you like to park?
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {quickActions.map((action, index) => (
-              <Card key={index} className="card-hover cursor-pointer border-2 hover:border-primary transition-all">
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <action.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {action.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    {action.description}
-                  </p>
-                  {action.action === 'zone' && (
-                    <div className="space-y-2">
-                      <Input
-                        type="text"
-                        placeholder="e.g., 12345"
-                        value={zoneNumber}
-                        onChange={(e) => setZoneNumber(e.target.value)}
-                        className="text-center text-lg font-mono"
-                      />
-                      <Button variant="outline" size="sm" className="w-full">
-                        Start Parking
-                      </Button>
-                    </div>
-                  )}
-                  {action.action === 'location' && (
-                    <Button variant="outline" size="sm" className="w-full">
-                      <Locate className="w-4 h-4 mr-2" />
-                      Use My Location
-                    </Button>
-                  )}
-                  {action.action === 'search' && (
-                    <Button variant="outline" size="sm" className="w-full">
-                      <Search className="w-4 h-4 mr-2" />
-                      Search Location
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section> */}
-
         {/* Nearby Parking Spots */}
         <section>
           <div className="flex items-center justify-between mb-8">
@@ -299,10 +218,10 @@ const ParkNow = () => {
               window.addEventListener("mouseup", onMouseUp);
             }}
           >
-            {filteredStations.length === 0 && !loading && (
+            {sortedStations.length === 0 && !loading && (
               <p className="text-muted-foreground">No parking spots found.</p>
             )}
-            {filteredStations.map((spot: any) => (
+            {sortedStations.map((spot: any) => (
               <Card
                 key={spot.ownerID}
                 className="card-hover overflow-hidden min-w-[280px] max-w-[200px] flex-shrink-0"
@@ -405,7 +324,11 @@ const ParkNow = () => {
 
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4">Parking Stations</h2>
-          <CustomMap />
+          <CustomMap
+            stations={stations}
+            userLocation={userLocation}
+            selectedStation={selectedStation}
+          />
         </div>
 
         {/* How to Park */}

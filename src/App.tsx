@@ -10,6 +10,8 @@ import Reserve from "./pages/Reserve";
 import Business from "./pages/Business";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import "leaflet/dist/leaflet.css";
+
 
 const queryClient = new QueryClient();
 

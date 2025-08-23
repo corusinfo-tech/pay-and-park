@@ -47,7 +47,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
                 <Car className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-foreground">ParkSmart</span>
+              <span className="text-xl font-bold text-foreground">Pay-And-Park</span>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
               The smarter way to find, reserve, and pay for parking. Making urban mobility easier for everyone.
@@ -63,7 +63,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
-                <span>hello@parksmart.com</span>
+                <span>hello@Pay-And-Park.com</span>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="py-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 ParkSmart. All rights reserved.
+            © 2024 Pay-And-Park. All rights reserved.
           </p>
           
           {/* Social Links */}

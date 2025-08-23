@@ -85,7 +85,7 @@ const Business = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="order-2 lg:order-1">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-                ParkSmart for Business
+                Pay-And-Park for Business
               </h1>
               <p className="text-lg sm:text-xl opacity-90 mb-6 sm:mb-8 leading-relaxed">
                 Streamline your business parking expenses with our comprehensive management platform. 
@@ -224,7 +224,7 @@ const Business = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Why businesses choose ParkSmart
+                Why businesses choose Pay-And-Park
               </h2>
               
               <div className="space-y-6">
@@ -289,7 +289,7 @@ const Business = () => {
             Ready to transform your business parking?
           </h2>
           <p className="text-xl opacity-90 mb-8">
-            Join hundreds of companies that trust ParkSmart to manage their parking needs.
+            Join hundreds of companies that trust Pay-And-Park to manage their parking needs.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

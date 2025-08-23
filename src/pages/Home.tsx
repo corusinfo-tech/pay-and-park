@@ -87,7 +87,7 @@ const Home = () => {
         <div className="absolute inset-0">
           <img 
             src={heroImage} 
-            alt="Woman using ParkSmart app"
+            alt="Woman using Pay-And-Park app"
             className="w-full h-full object-cover opacity-20"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary-dark/80" />
@@ -101,7 +101,7 @@ const Home = () => {
                   Park. Pay. Go.
                 </h1>
                 <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed animate-slide-up">
-                  When you're on the go, the free ParkSmart app makes it easy to find and pay for parking without running back to feed the meter. And for added convenience, you can reserve spots ahead of time.
+                  When you're on the go, the free Pay-And-Park app makes it easy to find and pay for parking without running back to feed the meter. And for added convenience, you can reserve spots ahead of time.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-scale-in">
@@ -109,7 +109,7 @@ const Home = () => {
                     <Smartphone className="mr-2 h-5 w-5" />
                     Get the mobile app
                   </Button>
-                  <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 sm:px-6">
+                  {/* <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 sm:px-6">
                     <Search className="mr-3 h-5 w-5 text-white flex-shrink-0" />
                     <input 
                       type="text" 
@@ -119,7 +119,7 @@ const Home = () => {
                     <Button size="sm" variant="secondary" className="ml-2">
                       Search
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -128,7 +128,7 @@ const Home = () => {
                 <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                   <img 
                     src={heroImage} 
-                    alt="Woman using ParkSmart app"
+                    alt="Woman using Pay-And-Park app"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -156,7 +156,7 @@ const Home = () => {
               The smarter way to park
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              ParkSmart puts the power to park in your hands. Whether you're looking for a spot now or reserving a spot for later, ParkSmart has you covered.
+              Pay-And-Park puts the power to park in your hands. Whether you're looking for a spot now or reserving a spot for later, Pay-And-Park has you covered.
             </p>
           </div>
 
@@ -221,10 +221,10 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6">
-                ParkSmart for Business
+                Pay-And-Park for Business
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8">
-                Learn about the smarter way to manage your business's parking expenses. As an admin for your ParkSmart for Business account, you can easily manage employee parking, set budgets, and track spending.
+                Learn about the smarter way to manage your business's parking expenses. As an admin for your Pay-And-Park for Business account, you can easily manage employee parking, set budgets, and track spending.
               </p>
               
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
@@ -241,10 +241,10 @@ const Home = () => {
                 ))}
               </div>
 
-              <Button variant="hero" size="lg" className="btn-hover-lift w-full sm:w-auto">
+              {/* <Button variant="hero" size="lg" className="btn-hover-lift w-full sm:w-auto">
                 <Building className="mr-2 h-5 w-5" />
                 Learn More About Business Solutions
-              </Button>
+              </Button> */}
             </div>
             
             <div className="relative order-1 lg:order-2">
@@ -269,18 +269,27 @@ const Home = () => {
             Ready to start parking smarter?
           </h2>
           <p className="text-lg sm:text-xl text-white/90 mb-6 sm:mb-8">
-            Join millions of users who have made parking effortless with ParkSmart.
+            Join millions of users who have made parking effortless with Pay-And-Park.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="lg" className="btn-hover-lift">
-              <Smartphone className="mr-2 h-5 w-5" />
-              Download iOS App
-            </Button>
-            <Button variant="secondary" size="lg" className="btn-hover-lift">
-              <Smartphone className="mr-2 h-5 w-5" />
-              Download Android App
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-scale-in">
+                  <Button variant="secondary" size="lg" className="btn-hover-lift text-sm sm:text-base">
+                    <Smartphone className="mr-2 h-5 w-5" />
+                    Get the mobile app
+                  </Button>
+                  {/* <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 sm:px-6">
+                    <Search className="mr-3 h-5 w-5 text-white flex-shrink-0" />
+                    <input 
+                      type="text" 
+                      placeholder="Search by location or venue"
+                      className="bg-transparent border-none text-white placeholder-white/70 text-sm sm:text-lg focus:outline-none flex-1 min-w-0"
+                    />
+                    <Button size="sm" variant="secondary" className="ml-2">
+                      Search
+                    </Button>
+                  </div> */}
+                </div>
           </div>
         </div>
       </section>

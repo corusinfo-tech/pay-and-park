@@ -81,7 +81,7 @@ const About = () => {
     {
       year: '2018',
       title: 'Company Founded',
-      description: 'ParkSmart was founded with a vision to revolutionize urban parking.'
+      description: 'Pay-And-Park was founded with a vision to revolutionize urban parking.'
     },
     {
       year: '2019',
@@ -91,7 +91,7 @@ const About = () => {
     {
       year: '2020',
       title: 'Business Platform Launch',
-      description: 'Launched ParkSmart for Business to serve enterprise customers.'
+      description: 'Launched Pay-And-Park for Business to serve enterprise customers.'
     },
     {
       year: '2021',
@@ -144,7 +144,7 @@ const About = () => {
                 Our Mission
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
-                At ParkSmart, we believe that finding parking shouldn't be a source of stress or wasted time. 
+                At Pay-And-Park, we believe that finding parking shouldn't be a source of stress or wasted time. 
                 Our mission is to transform the urban parking experience through intelligent technology that 
                 connects drivers with available spaces instantly.
               </p>
@@ -213,7 +213,7 @@ const About = () => {
               Meet Our Team
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              The passionate people behind ParkSmart's innovative parking solutions.
+              The passionate people behind Pay-And-Park's innovative parking solutions.
             </p>
           </div>
 
@@ -293,7 +293,7 @@ const About = () => {
           </h2>
           <p className="text-xl opacity-90 mb-8">
             Whether you're a user, partner, or potential team member, 
-            we'd love to have you be part of the ParkSmart story.
+            we'd love to have you be part of the Pay-And-Park story.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

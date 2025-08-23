@@ -36,34 +36,32 @@ function ChangeView({ center }: { center: [number, number] }) {
 }
 
 function ClosePopupOnOutsideClick() {
-    const map = useMap();
-  
-    useEffect(() => {
-      const container = map.getContainer();
-  
-      const handleDocClick = (e: MouseEvent) => {
-        // If the click did NOT happen inside the map container, close popups
-        if (!container.contains(e.target as Node)) {
-          // Close the currently open popup (if any)
-          map.closePopup();
-          // Also close any layer-bound popups (markers)
-          map.eachLayer((layer: any) => {
-            if (typeof layer.closePopup === "function") {
-              layer.closePopup();
-            }
-          });
-        }
-      };
-  
-      // Use mousedown/pointerdown so it feels instant
-      document.addEventListener("mousedown", handleDocClick);
-      return () => document.removeEventListener("mousedown", handleDocClick);
-    }, [map]);
-  
-    return null;
-  }
-  
-  
+  const map = useMap();
+
+  useEffect(() => {
+    const container = map.getContainer();
+
+    const handleDocClick = (e: MouseEvent) => {
+      // If the click did NOT happen inside the map container, close popups
+      if (!container.contains(e.target as Node)) {
+        // Close the currently open popup (if any)
+        map.closePopup();
+        // Also close any layer-bound popups (markers)
+        map.eachLayer((layer: any) => {
+          if (typeof layer.closePopup === "function") {
+            layer.closePopup();
+          }
+        });
+      }
+    };
+
+    // Use mousedown/pointerdown so it feels instant
+    document.addEventListener("mousedown", handleDocClick);
+    return () => document.removeEventListener("mousedown", handleDocClick);
+  }, [map]);
+
+  return null;
+}
 
 export default function CustomMap({
   stations,
@@ -107,13 +105,12 @@ export default function CustomMap({
   }
 
   return (
-    <div className="h-[500px] w-full rounded-lg overflow-hidden shadow-md z-0" >
+    <div className="h-[500px] w-full rounded-lg overflow-hidden shadow-md z-0">
       <MapContainer
         center={location}
         zoom={15}
         scrollWheelZoom
         className="h-full w-full z-0"
-        
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -121,7 +118,7 @@ export default function CustomMap({
         />
         <ChangeView center={location} />
 
-        <ClosePopupOnOutsideClick /> 
+        <ClosePopupOnOutsideClick />
 
         {/* Show user marker only when not focusing a selected station */}
         {userLocation && !selectedStation && (
@@ -138,10 +135,25 @@ export default function CustomMap({
             icon={carIcon}
           >
             <Popup>
-              <strong>{spot.owner_name}</strong> <br />
-              {spot.owner_address} <br />
-              🚗 {spot.plots?.length || 0} slots
-            </Popup>
+  <strong>{spot.owner_name}</strong> <br />
+  {spot.owner_address} <br />
+  🚗 {spot.plots?.length || 0} slots
+  <br />
+
+  {/* Directions Button */}
+  {userLocation && (
+    <button
+      className="mt-2 px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
+      onClick={() => {
+        const gmapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${spot.latitude},${spot.longitude}&travelmode=driving`;
+        window.open(gmapsUrl, "_blank");
+      }}
+    >
+      🧭 Get Directions
+    </button>
+  )}
+</Popup>
+
           </Marker>
         ))}
       </MapContainer>

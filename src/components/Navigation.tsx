@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Car, Search, Building, Users } from 'lucide-react';
+import GetAppModal from './GetAppModal';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAppModalOpen, setIsAppModalOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
     { name: 'Park Now', href: '/park-now', icon: Car },
-    { name: 'Reserve Parking', href: '/reserve', icon: Search },
+    // { name: 'Reserve Parking', href: '/reserve', icon: Search },
     { name: 'For Business', href: '/business', icon: Building },
     { name: 'About', href: '/about', icon: Users },
   ];
@@ -22,10 +24,11 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Car className="w-5 h-5 text-white" />
+            {/* <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <Car className="w-5 h-5 text-white" /> <img  src="./logo.png" alt="" />
             </div>
-            <span className="text-xl font-bold text-foreground">Pay-And-Park</span>
+            <span className="text-xl font-bold text-foreground">Pay-And-Park</span> */}
+            <div className='bg-gradient-primary ' style={{borderRadius:"20px"}} ><img src="./logo.png" alt="" /></div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -48,10 +51,10 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            {/* <Button variant="outline" size="sm">
               Sign In
-            </Button>
-            <Button variant="hero" size="sm">
+            </Button> */}
+            <Button variant="hero" size="sm"  onClick={() => setIsAppModalOpen(true)}>
               Get App
             </Button>
           </div>
@@ -92,10 +95,10 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="pt-4 space-y-2">
-                <Button variant="outline" className="w-full">
+                {/* <Button variant="outline" className="w-full">
                   Sign In
-                </Button>
-                <Button variant="hero" className="w-full">
+                </Button> */}
+                <Button variant="hero" className="w-full" onClick={() => setIsAppModalOpen(true)}>
                   Get App
                 </Button>
               </div>
@@ -103,6 +106,9 @@ const Navigation = () => {
           </div>
         )}
       </div>
+
+       {/* Modal Component */}
+       <GetAppModal open={isAppModalOpen} onOpenChange={setIsAppModalOpen} />
     </nav>
   );
 };

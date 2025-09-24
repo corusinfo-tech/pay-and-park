@@ -5,7 +5,7 @@ const Footer = () => {
   const footerLinks = {
     product: [
       { name: 'Park Now', href: '/park-now' },
-      { name: 'Reserve Parking', href: '/reserve' },
+      // { name: 'Reserve Parking', href: '/reserve' },
       { name: 'Mobile App', href: '/app' },
       { name: 'Pricing', href: '/pricing' },
     ],
@@ -140,7 +140,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="py-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 Pay-And-Park. All rights reserved.
+            © 2025 Pay-And-Park. All rights reserved.
           </p>
           
           {/* Social Links */}

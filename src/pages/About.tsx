@@ -301,7 +301,11 @@ const About = () => {
               <Users className="mr-2 h-5 w-5" />
               View Careers
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-white  hover:bg-white text-primary hover:text-primary btn-hover-lift"
+            >
               <Mail className="mr-2 h-5 w-5" />
               Contact Us
             </Button>
